@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Tiger Puri">
+  <meta name="description" content="Coding Exercise Commission">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Tiger Puri Commission</title>
+  
+  <link href="css/styles.css" rel="stylesheet" type="text/css"/>
+
+
+</head>
+
+<body>
+  <h1>Tiger Puri Commission</h1><br>
+  <div class="report" id="report">
+    <h2>Weekly Commission Report</h2>
+    <!-- The report will be displayed here -->
+</div>
+
+<script>
+    let totalSales = 0;
+    let input;
+
+    var playerName = prompt("Enter your name:");
+    while (!playerName) {
+        playerName = prompt("Please enter a valid name:");
+    }
+
+    do {
+        input = prompt("Enter sale amount (or 'Done' to finish):", "");
+        
+        if (input === null) {
+            alert("Input cancelled.");
+            break;
+        } else if (input.toLowerCase() !== "done") {
+            let saleAmount = parseFloat(input);
+            if (!isNaN(saleAmount) && saleAmount > 0) {
+                totalSales += saleAmount;
+            } else {
+                alert("Invalid input. Please enter a valid number.");
+            }
+        }
+    } while (input.toLowerCase() !== "done");
+
+    let commissionRate = 0;
+
+    if (totalSales > 0 && totalSales <= 499.99) {
+        commissionRate = 0.05;
+    } else if (totalSales >= 500 && totalSales <= 999.99) {
+        commissionRate = 0.10;
+    } else if (totalSales >= 1000) {
+        commissionRate = 0.15;
+    }
+
+    let commissionEarned = totalSales * commissionRate;
+    let totalEarnings = totalSales + commissionEarned;
+
+    document.getElementById('report').innerHTML += `
+        <p>Hello ` + playerName + `, Here is your Weekly Commission Report.</p>
+        <p>Your sales total is $${totalSales.toFixed(2)}, so your commission rate is ${(commissionRate * 100).toFixed(2)}%.</p>
+        <p>Your total commission is $${commissionEarned.toFixed(2)}.</p>
+        <p>Your total earnings are $${totalEarnings.toFixed(2)}.</p>
+    `;
+</script>
+
+
+</body>
