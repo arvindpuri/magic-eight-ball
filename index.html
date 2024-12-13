@@ -7,7 +7,7 @@
   <meta name="description" content="Coding Exercise Commission">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Tiger Puri Commission</title>
+  <title>Tiger Puri Magic Eight Ball</title>
   
   <link href="css/styles.css" rel="stylesheet" type="text/css"/>
 
@@ -15,57 +15,37 @@
 </head>
 
 <body>
-  <h1>Tiger Puri Commission</h1><br>
-  <div class="report" id="report">
-    <h2>Weekly Commission Report</h2>
-    <!-- The report will be displayed here -->
-</div>
+  <h1>Tiger Puri Magic Eight Ball</h1><br>
+  <p>Ask your yes or no question:</p>
+  <input type="text" id="question" placeholder="Type your question here">
+  <button onclick="askMagicEightBall()">Ask the Magic Eight Ball</button>
+  <p id="answer"></p>
 
-<script>
-    let totalSales = 0;
-    let input;
+  <script>
+      const responses = [
+          "Outlook not so good.",
+          "Yes, definitely!",
+          "Ask again later.",
+          "Don't count on it.",
+          "Yes, in due time.",
+          "My sources say no.",
+          "Absolutely, go for it!",
+          "Very doubtful."
+      ];
 
-    var playerName = prompt("Enter your name:");
-    while (!playerName) {
-        playerName = prompt("Please enter a valid name:");
-    }
-
-    do {
-        input = prompt("Enter sale amount (or 'Done' to finish):", "");
-        
-        if (input === null) {
-            alert("Input cancelled.");
-            break;
-        } else if (input.toLowerCase() !== "done") {
-            let saleAmount = parseFloat(input);
-            if (!isNaN(saleAmount) && saleAmount > 0) {
-                totalSales += saleAmount;
-            } else {
-                alert("Invalid input. Please enter a valid number.");
-            }
-        }
-    } while (input.toLowerCase() !== "done");
-
-    let commissionRate = 0;
-
-    if (totalSales > 0 && totalSales <= 499.99) {
-        commissionRate = 0.05;
-    } else if (totalSales >= 500 && totalSales <= 999.99) {
-        commissionRate = 0.10;
-    } else if (totalSales >= 1000) {
-        commissionRate = 0.15;
-    }
-
-    let commissionEarned = totalSales * commissionRate;
-    let totalEarnings = totalSales + commissionEarned;
-
-    document.getElementById('report').innerHTML += `
-        <p>Hello ` + playerName + `, Here is your Weekly Commission Report.</p>
-        <p>Your sales total is $${totalSales.toFixed(2)}, so your commission rate is ${(commissionRate * 100).toFixed(2)}%.</p>
-        <p>Your total commission is $${commissionEarned.toFixed(2)}.</p>
-        <p>Your total earnings are $${totalEarnings.toFixed(2)}.</p>
-    `;
-</script>
+      function askMagicEightBall() {
+          const question = document.getElementById('question').value;
+          if (question.trim() === "") {
+              alert("Please enter a question.");
+              return;
+          }
+          
+          const randomIndex = Math.floor(Math.random() * responses.length);
+          const answer = responses[randomIndex];
+          
+          document.getElementById('answer').innerText = `Magic Eight Ball says: ${answer}`;
+      }
+  </script>
 
 
 </body>
