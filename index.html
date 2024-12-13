@@ -20,6 +20,7 @@
   <input type="text" id="question" placeholder="Type your question here">
   <button onclick="askMagicEightBall()">Ask the Magic Eight Ball</button>
   <p id="answer"></p>
+  <button onclick="stopAsking()">Stop Asking</button>
 
   <script>
       const responses = [
@@ -44,6 +45,23 @@
           const answer = responses[randomIndex];
           
           document.getElementById('answer').innerText = `Magic Eight Ball says: ${answer}`;
+      }
+
+      function stopAsking() {
+          const farewellMessages = [
+              "Thank you for playing! May your future be bright!",
+              "Goodbye! Remember, the magic is always within you!",
+              "Thanks for stopping by! Trust your instincts!",
+              "Farewell! May your questions always lead to answers!",
+              "Goodbye! Keep seeking the magic in life!"
+          ];
+          
+          const randomFarewellIndex = Math.floor(Math.random() * farewellMessages.length);
+          const farewellMessage = farewellMessages[randomFarewellIndex];
+          
+          document.getElementById('answer').innerText = farewellMessage;
+          document.getElementById('question').style.display = 'none'; // Hide question input
+          document.querySelector('button[onclick="askMagicEightBall()"]').style.display = 'none'; // Hide ask button
       }
   </script>
 
